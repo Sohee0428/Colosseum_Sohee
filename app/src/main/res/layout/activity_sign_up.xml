@@ -29,7 +29,7 @@
         android:id="@+id/passwordEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="8자 이상으로"
+        android:hint="8자 이상으로"
         android:inputType="textPassword"/>
 
     <TextView
