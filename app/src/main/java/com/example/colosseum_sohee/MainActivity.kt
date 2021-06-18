@@ -2,6 +2,7 @@ package com.example.colosseum_sohee
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.colosseum_sohee.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
@@ -31,6 +32,21 @@ class MainActivity : BaseActivity() {
 //                     => 이 내부를 파싱(분석)해서 상황에 따른 대응
 //                    예) 로그인 실패시 그 이유를 토스트로 띄운다
 
+
+                    val code = jsonObj.getInt("code")
+                    if(code == 200) {
+//                        로그인 성공
+                    }
+                    else {
+//                        로그인 실패
+
+                        val message = jsonObj.getString("message")
+
+                        runOnUiThread {
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                        }
+
+                    }
                 }
 
 
