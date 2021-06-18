@@ -5,14 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.colosseum_sohee.utils.ServerUtil
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 
-class MainActivity : BaseActivity() {
+class LoginActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
 
         setupEvents()
         setValues()
@@ -37,6 +37,14 @@ class MainActivity : BaseActivity() {
                     val code = jsonObj.getInt("code")
                     if(code == 200) {
 //                        로그인 성공
+                        
+                        val dataObj = jsonObj.getJSONObject("data")
+                        val userObj = jsonObj.getJSONObject("user")
+                        val nickname = jsonObj.getString("nick_name")
+                        
+                        runOnUiThread{
+                            Toast.makeText(mContext, "${nickname}님 로그인 성공!", Toast.LENGTH_SHORT).show()
+                        }
                     }
                     else {
 //                        로그인 실패
