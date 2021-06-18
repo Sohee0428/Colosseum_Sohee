@@ -1,5 +1,6 @@
 package com.example.colosseum_sohee
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -54,7 +55,14 @@ class MainActivity : BaseActivity() {
 
 
         }
+
+        signUpBtn.setOnClickListener {
+            val myIntent = Intent(mContext, SignUpActivity::class.java)
+            startActivity(myIntent)
+        }
+
     }
+
 
     override fun setValues() {
     }

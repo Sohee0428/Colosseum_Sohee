@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".SignUpActivity"
     android:orientation="vertical"
-    android:padding ="20dp">
+    android:padding="15dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,33 +17,37 @@
         android:id="@+id/emailEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="이메일 형식"
+        android:text="이메일 형식으로 입력"
         android:inputType="textEmailAddress"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="비밀번호"
-        android:layout_marginTop="15dp"/>
+        android:text="비밀번호"/>
 
     <EditText
         android:id="@+id/passwordEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="8자 이상"
+        android:text="8자 이상으로"
         android:inputType="textPassword"/>
 
-    <Button
-        android:id="@+id/loginBtn"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="닉네임"/>
+
+    <EditText
+        android:id="@+id/nicknameEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="로그인"/>
+        android:text="닉네임 입력 (한글 가능)"
+        android:singleLine="true"/>
 
     <Button
         android:id="@+id/signUpBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="회원가입"/>
-
 
 </LinearLayout>
