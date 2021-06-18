@@ -35,16 +35,23 @@ class LoginActivity : BaseActivity() {
 
 
                     val code = jsonObj.getInt("code")
+
                     if(code == 200) {
 //                        로그인 성공
                         
-                        val dataObj = jsonObj.getJSONObject("data")
-                        val userObj = jsonObj.getJSONObject("user")
-                        val nickname = jsonObj.getString("nick_name")
-                        
-                        runOnUiThread{
-                            Toast.makeText(mContext, "${nickname}님 로그인 성공!", Toast.LENGTH_SHORT).show()
-                        }
+//                        val dataObj = jsonObj.getJSONObject("data")
+//                        val userObj = jsonObj.getJSONObject("user")
+//                        val nickname = jsonObj.getString("nick_name")
+//
+//                        runOnUiThread{
+//                            Toast.makeText(mContext, "${nickname}님 로그인 성공!", Toast.LENGTH_SHORT).show()
+//                        }
+
+
+                        val myIntent = Intent(mContext, MainActivity::class.java)
+                        startActivity(myIntent)
+
+                        finish()
                     }
                     else {
 //                        로그인 실패

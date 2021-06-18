@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.colosseum_sohee.utils.ServerUtil
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_sign_up.emailEdt
+import kotlinx.android.synthetic.main.activity_sign_up.passwordEdt
+import kotlinx.android.synthetic.main.activity_sign_up.signUpBtn
 import org.json.JSONObject
 
 class SignUpActivity : BaseActivity() {
@@ -57,6 +61,22 @@ class SignUpActivity : BaseActivity() {
 
 
             })
+        }
+
+        emailCheckBtn.setOnClickListener {
+
+//            입력한 이메일 중복 검사
+            val inputEmail = emailEdt.text.toString()
+
+//            서버에 중복 여부 확인 API 호출
+            ServerUtil.getRequestDuplCheck("EMAIL", inputEmail, object : ServerUtil.Companion.JsonResponseHandler{
+                override fun onResponse(jsonObj: JSONObject) {
+
+                }
+
+
+            })
+
         }
     }
 
