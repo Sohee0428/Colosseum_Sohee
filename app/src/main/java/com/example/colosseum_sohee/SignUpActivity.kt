@@ -71,7 +71,13 @@ class SignUpActivity : BaseActivity() {
 //            서버에 중복 여부 확인 API 호출
             ServerUtil.getRequestDuplCheck("EMAIL", inputEmail, object : ServerUtil.Companion.JsonResponseHandler{
                 override fun onResponse(jsonObj: JSONObject) {
-
+                    
+                    val code = jsonObj.getInt("code")
+                    
+                    runOnUiThread{
+                            val message = jsonObj.getString("message")
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                        }
                 }
 
 
