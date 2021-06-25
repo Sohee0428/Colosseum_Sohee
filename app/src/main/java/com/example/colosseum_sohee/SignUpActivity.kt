@@ -1,10 +1,8 @@
 package com.example.colosseum_sohee
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.colosseum_sohee.utils.ServerUtil
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.emailEdt
 import kotlinx.android.synthetic.main.activity_sign_up.passwordEdt
