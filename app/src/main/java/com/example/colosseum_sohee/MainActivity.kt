@@ -37,12 +37,17 @@ class MainActivity : BaseActivity() {
 //                topicArr 안에 있는 여러 개의 주제들을 반복적으로 파싱 => fon문을 활용
 //                배열에 10개의 주제가 있은경우 index는 0~9까지
 
-                for ( index in 0 until topicArr.length())
+                for ( index in 0 until topicArr.length()) {
 
 //                    index 위치에 맞는 주제들을 Topics 클래스 형태로 변환
+
+                    val topicObj = topicArr.getJSONObject(index)
+                    val topicData = Topic.getTopicDataFromJson(topicObj)
+
 //                    변환된 주제응 mTopicList에 추가
+                    mTopicList.add(topicData)
 
-
+                }
             }
 
        })
