@@ -1,5 +1,6 @@
 package com.example.colosseum_sohee.utils
 
+import android.content.Context
 import android.util.Log
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
@@ -19,7 +20,6 @@ class ServerUtil {
         val BASE_URL = "http://54.180.52.26"
 
 //        로그인 하는 기능
-
         fun postRequestLogin(email: String, pw: String, handler : JsonResponseHandler?) {
 
 //            서버에 입력받은 email, pw 전달 => 로그인 기능 POST /user 로 전달 => 요청(Request) 실행
@@ -72,7 +72,6 @@ class ServerUtil {
         }
 
 //        회원가입 하는 기능
-
         fun putRequestSignUp(email: String, pw: String, nickname: String,  handler : JsonResponseHandler?) {
 
 //            서버에 입력받은 email, pw, nick 전달 => 회원가입 기능 PUT /user 로 전달 => 요청(Request) 실행
@@ -130,7 +129,6 @@ class ServerUtil {
         }
 
 //        이메일 / 닉네임 중복 확인 기능
-
         fun getRequestDuplCheck(type: String, value: String, handler: JsonResponseHandler?){
 
 //            어디로 가느냐 + 어떤 데이터 인지를 같이 명시
@@ -148,6 +146,50 @@ class ServerUtil {
             val request = Request.Builder()
                 .url(urlString)
                 .get()
+                .build()
+
+            val client = OkHttpClient()
+
+            client.newCall(request).enqueue(object : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+                    val bodyString = response.body!!.string()
+
+                    val jsonObj = JSONObject(bodyString)
+                    Log.d("서버 응답 본문", jsonObj.toString())
+
+                    handler?.onResponse(jsonObj)
+
+                }
+
+
+            })
+
+        }
+
+//        진행중인 주제 목록 확인 기능
+        fun getRequestMainInfo(context: Context, handler: JsonResponseHandler?){
+
+//            어디로 가느냐 + 어떤 데이터 인지를 같이 명시
+//            URL 저적으면서 + 파라미터 첨부도 같이 => 보조도구(Builder)
+
+            val urlBuilder = "${BASE_URL}/v2/main_info".toHttpUrlOrNull()!!.newBuilder()
+
+//            urlBuilder.addEncodedQueryParameter("type", type)
+//            urlBuilder.addEncodedQueryParameter("value", value)
+
+            val urlString = urlBuilder.build().toString()
+
+            Log.d("완성된 url", urlString)
+
+            val request = Request.Builder()
+                .url(urlString)
+                .get()
+                .header("X-Http-Token", ContextUtil.getToken(context))
                 .build()
 
             val client = OkHttpClient()
