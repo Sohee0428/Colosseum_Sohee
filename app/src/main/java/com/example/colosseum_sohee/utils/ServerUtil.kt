@@ -13,14 +13,14 @@ class ServerUtil {
     companion object {
 
         interface JsonResponseHandler {
-            fun onResponse(jsonObj : JSONObject)
+            fun onResponse(jsonObj: JSONObject)
         }
 
         //    모든 기능의 기본이 되는 주소
         val BASE_URL = "http://54.180.52.26"
 
-//        로그인 하는 기능
-        fun postRequestLogin(email: String, pw: String, handler : JsonResponseHandler?) {
+        //        로그인 하는 기능
+        fun postRequestLogin(email: String, pw: String, handler: JsonResponseHandler?) {
 
 //            서버에 입력받은 email, pw 전달 => 로그인 기능 POST /user 로 전달 => 요청(Request) 실행
 //            라이브러리 (OkHttp) 활용해서 짜보기
@@ -61,7 +61,7 @@ class ServerUtil {
 //                    bodyString 변수에는 한글이 깨져있다. => JSONObject로 변환하면 한글 정상 처리
                     val jsonObj = JSONObject(bodyString)
 
-                Log.d("응답 본문", jsonObj.toString())
+                    Log.d("응답 본문", jsonObj.toString())
 
 //                    handler 변수가 null이 아니라면 (실체가 있다면) - 그 내부에 적힌 내용 실행
                     handler?.onResponse(jsonObj)
@@ -71,8 +71,13 @@ class ServerUtil {
 
         }
 
-//        회원가입 하는 기능
-        fun putRequestSignUp(email: String, pw: String, nickname: String,  handler : JsonResponseHandler?) {
+        //        회원가입 하는 기능
+        fun putRequestSignUp(
+            email: String,
+            pw: String,
+            nickname: String,
+            handler: JsonResponseHandler?
+        ) {
 
 //            서버에 입력받은 email, pw, nick 전달 => 회원가입 기능 PUT /user 로 전달 => 요청(Request) 실행
 //            라이브러리 (OkHttp) 활용해서 짜보기
@@ -128,8 +133,8 @@ class ServerUtil {
 
         }
 
-//        이메일 / 닉네임 중복 확인 기능
-        fun getRequestDuplCheck(type: String, value: String, handler: JsonResponseHandler?){
+        //        이메일 / 닉네임 중복 확인 기능
+        fun getRequestDuplCheck(type: String, value: String, handler: JsonResponseHandler?) {
 
 //            어디로 가느냐 + 어떤 데이터 인지를 같이 명시
 //            URL 저적으면서 + 파라미터 첨부도 같이 => 보조도구(Builder)
@@ -150,7 +155,7 @@ class ServerUtil {
 
             val client = OkHttpClient()
 
-            client.newCall(request).enqueue(object : Callback{
+            client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
 
                 }
@@ -171,8 +176,8 @@ class ServerUtil {
 
         }
 
-//        진행중인 주제 목록 확인 기능
-        fun getRequestMainInfo(context: Context, handler: JsonResponseHandler?){
+        //        진행중인 주제 목록 확인 기능
+        fun getRequestMainInfo(context: Context, handler: JsonResponseHandler?) {
 
 //            어디로 가느냐 + 어떤 데이터 인지를 같이 명시
 //            URL 저적으면서 + 파라미터 첨부도 같이 => 보조도구(Builder)
@@ -194,7 +199,7 @@ class ServerUtil {
 
             val client = OkHttpClient()
 
-            client.newCall(request).enqueue(object : Callback{
+            client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
 
                 }
@@ -214,5 +219,53 @@ class ServerUtil {
             })
 
         }
+
+        //        원하는 주제 상세현황 확인 기능
+        fun getRequestTopicDetail(context: Context, topicId: Int, handler: JsonResponseHandler?) {
+
+//            어디로 가느냐 + 어떤 데이터 인지를 같이 명시
+//            URL 저적으면서 + 파라미터 첨부도 같이 => 보조도구(Builder)
+
+//                주소를 정하는 방법 2가지
+//            val urlBuilder = "${BASE_URL}/topic/${topicId}".toHttpUrlOrNull()!!.newBuilder()
+            val urlBuilder = "${BASE_URL}/topic/${topicId}".toHttpUrlOrNull()!!.newBuilder()
+            urlBuilder.addEncodedPathSegment(topicId.toString())
+
+//            urlBuilder.addEncodedQueryParameter("type", type)
+//            urlBuilder.addEncodedQueryParameter("value", value)
+
+            val urlString = urlBuilder.build().toString()
+
+            Log.d("완성된 url", urlString)
+
+            val request = Request.Builder()
+                .url(urlString)
+                .get()
+                .header("X-Http-Token", ContextUtil.getToken(context))
+                .build()
+
+            val client = OkHttpClient()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+                    val bodyString = response.body!!.string()
+
+                    val jsonObj = JSONObject(bodyString)
+                    Log.d("서버 응답 본문", jsonObj.toString())
+
+                    handler?.onResponse(jsonObj)
+
+                }
+
+
+            })
+
+        }
+
     }
 }
