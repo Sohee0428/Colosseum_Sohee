@@ -228,7 +228,7 @@ class ServerUtil {
 
 //                주소를 정하는 방법 2가지
 //            val urlBuilder = "${BASE_URL}/topic/${topicId}".toHttpUrlOrNull()!!.newBuilder()
-            val urlBuilder = "${BASE_URL}/topic/${topicId}".toHttpUrlOrNull()!!.newBuilder()
+            val urlBuilder = "${BASE_URL}/topic".toHttpUrlOrNull()!!.newBuilder()
             urlBuilder.addEncodedPathSegment(topicId.toString())
 
 //            urlBuilder.addEncodedQueryParameter("type", type)
