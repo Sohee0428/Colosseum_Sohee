@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.colosseum_sohee.R
 import com.example.colosseum_sohee.datas.Reply
 import com.example.colosseum_sohee.datas.Topic
+import org.w3c.dom.Text
 
 class ReplyAdapter (val mContext: Context,
                     resId: Int, // 다른 곳에서 사용하지 않을것이기 때문에 val 없이 작성
@@ -31,7 +32,11 @@ class ReplyAdapter (val mContext: Context,
 
         val data = mList[position]
 
+        val selectedSideTxt = row.findViewById<TextView>(R.id.selectedSideTxt)
+        val userNicknameTxt = row.findViewById<TextView>(R.id.userNicknameTxt)
+        val contentTxt = row.findViewById<TextView>(R.id.contentTxt)
 
+        contentTxt.text = data.content
 
         return row
     }
