@@ -311,13 +311,67 @@ class ServerUtil {
         }
 
         //        의견 등록하기
-        fun postRequestReply(context: Context, topicId: Int, content: String, handler: JsonResponseHandler?) {
+        fun postRequestReply(
+            context: Context,
+            topicId: Int,
+            content: String,
+            handler: JsonResponseHandler?
+        ) {
 
             val urlString = "${BASE_URL}/topic_reply"
 
             val formData = FormBody.Builder()
                 .add("topic_id", topicId.toString())
                 .add("content", content)
+                .build()
+
+            val request = Request.Builder()
+                .url(urlString)
+                .post(formData)
+                .header("X-Http-Token", ContextUtil.getToken(context))
+                .build()
+
+//            클라이언트로써의 동작 : requst 요청 실행 => OkHttp 라이브러리 지원
+            val client = OkHttpClient()
+
+//            실제로 서버에 요청 날리기 => 갔다 와서는 뭘 할것인지
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+//                    서버에 연결 자체를 실패한 경우 - 서버 마비, 인터넷 단선
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+//                    로그인 성공, 로그인 실패 (연결 성공 -> 검사 실패) - 응답이 돌아온 경우
+
+//                    응답 본문을 STRING으로 저장
+                    val bodyString = response.body!!.string()
+
+//                    bodyString 변수에는 한글이 깨져있다. => JSONObject로 변환하면 한글 정상 처리
+                    val jsonObj = JSONObject(bodyString)
+
+                    Log.d("응답 본문", jsonObj.toString())
+
+//                    handler 변수가 null이 아니라면 (실체가 있다면) - 그 내부에 적힌 내용 실행
+                    handler?.onResponse(jsonObj)
+                }
+            }
+            )
+
+        }
+
+        //        의견에 좋아요 / 싫어요 찍기
+        fun postRequestLikeOrDislike(
+            context: Context,
+            replyId: Int,
+            isLike: Boolean,
+            handler: JsonResponseHandler?
+        ) {
+
+            val urlString = "${BASE_URL}/topic_reply_like"
+
+            val formData = FormBody.Builder()
+                .add("reply_id", replyId.toString())
+                .add("is_like", isLike.toString())
                 .build()
 
             val request = Request.Builder()
