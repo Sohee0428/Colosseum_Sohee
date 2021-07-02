@@ -34,6 +34,17 @@ class ViewTopicDetailActivity : BaseActivity() {
                 }
             })
         }
+
+        voteToSecondSideBtn.setOnClickListener {
+
+            ServerUtil.postRequestVote(mContext, mTopic.sides[1].id, object : ServerUtil.Companion.JsonResponseHandler{
+                override fun onResponse(jsonObj: JSONObject) {
+
+                    getTopicDetailFromServer()
+                }
+
+            })
+        }
    }
 
     override fun setValues() {
