@@ -28,7 +28,9 @@ class ViewTopicDetailActivity : BaseActivity() {
             ServerUtil.postRequestVote(mContext, mTopic.sides[0].id, object : ServerUtil.Companion.JsonResponseHandler{
                 override fun onResponse(jsonObj: JSONObject) {
 
-//                    서버의 응답 대응
+//                    서버의 응답 대응 => 서버에서 최신 투표 현황을 받아서 다시 ui에 반영
+
+                    getTopicDetailFromServer()
                 }
             })
         }
