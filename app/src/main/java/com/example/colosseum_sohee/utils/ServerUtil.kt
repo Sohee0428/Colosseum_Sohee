@@ -6,6 +6,7 @@ import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.json.JSONObject
 import java.io.IOException
+import java.util.logging.Handler
 
 class ServerUtil {
 
@@ -401,6 +402,7 @@ class ServerUtil {
                     Log.d("응답 본문", jsonObj.toString())
 
 //                    handler 변수가 null이 아니라면 (실체가 있다면) - 그 내부에 적힌 내용 실행
+
                     handler?.onResponse(jsonObj)
                 }
             }
