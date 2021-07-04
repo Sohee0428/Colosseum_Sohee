@@ -1,5 +1,6 @@
 package com.example.colosseum_sohee
 
+import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -10,6 +11,12 @@ abstract class BaseActivity : AppCompatActivity(){
 
     abstract fun setupEvents()
     abstract fun setValues()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setCustomActionBar()
+    }
 
     fun setCustomActionBar(){
 
