@@ -3,10 +3,12 @@ package com.example.colosseum_sohee
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.example.colosseum_sohee.adapters.TopicAdapter
 import com.example.colosseum_sohee.datas.Topic
 import com.example.colosseum_sohee.utils.ServerUtil
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
@@ -21,6 +23,9 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         setValues()
         setupEvents()
+
+//       푸시 발송 연습용 코드 -> 기기 고유번호 확인
+        Log.d("디바이스 토큰", FirebaseInstanceId.getInstance().token!!)
     }
 
     override fun setupEvents() {
