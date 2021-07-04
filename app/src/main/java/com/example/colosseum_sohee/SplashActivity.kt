@@ -44,8 +44,5 @@ class SplashActivity : BaseActivity() {
             finish()
 
         }, 3000)
-
-        //        BaseActivity가 물려준 백버튼을 숨김처리
-        backBtn.visibility = View.GONE
     }
 }
