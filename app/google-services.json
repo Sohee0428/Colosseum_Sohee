@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "391189848659",
+    "project_id": "colosseum-sohee",
+    "storage_bucket": "colosseum-sohee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391189848659:android:a1a69b14287a6fa2dedca6",
+        "android_client_info": {
+          "package_name": "com.example.colosseum_sohee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "391189848659-6iumcsm4c3f1usemutj01ihdklo2qpdm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoqUT8ZQLBfTpjzHIcse-0eEA6x91Vfc4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "391189848659-6iumcsm4c3f1usemutj01ihdklo2qpdm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
