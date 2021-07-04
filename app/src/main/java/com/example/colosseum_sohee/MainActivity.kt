@@ -3,6 +3,7 @@ package com.example.colosseum_sohee
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.colosseum_sohee.adapters.TopicAdapter
 import com.example.colosseum_sohee.datas.Topic
 import com.example.colosseum_sohee.utils.ServerUtil
@@ -41,6 +42,8 @@ class MainActivity : BaseActivity() {
         mTopicAdapter = TopicAdapter(mContext, R.layout.topic_list_item, mTopicList)
         topicListView.adapter = mTopicAdapter
 
+//        BaseActivity가 물려준 백버튼을 숨김처리
+        backBtn.visibility = View.GONE
     }
 
 

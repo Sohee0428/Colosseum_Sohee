@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import com.example.colosseum_sohee.utils.ContextUtil
 
 class SplashActivity : BaseActivity() {
@@ -43,5 +44,8 @@ class SplashActivity : BaseActivity() {
             finish()
 
         }, 3000)
+
+        //        BaseActivity가 물려준 백버튼을 숨김처리
+        backBtn.visibility = View.GONE
     }
 }
